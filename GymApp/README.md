@@ -1,72 +1,54 @@
-# Fit AI Coach - Tu Gimnasio en WhatsApp 24/7
+# Fit IA - Asistente Virtual para Gimnasios
 
-Sistema de gestion para gimnasios con asistente de IA integrado via WhatsApp.
+Sistema de gestion de membresias y clases con asistente de IA por WhatsApp.
 
-**Video**: [Proximamente]
+**Video**: [YouTube - Sin Codigo Lat]
 
 ## Que Construiremos
 
-- Dashboard de administracion moderno
-- Gestion de miembros y membresias
-- Calendario de clases con reservas
-- Chat WhatsApp con IA (reserva clases, genera links de pago)
+- Landing page moderna
+- Dashboard con mensajes, miembros, membresias, clases, pagos
+- Chat estilo WhatsApp para supervisar la IA
 - Pagos recurrentes con Stripe
+- Asistente IA que registra miembros, agenda clases y cobra automaticamente
 
 ## Stack
 
-| Categoria | Tecnologia |
-|-----------|------------|
-| Frontend | React 18 + Vite + TypeScript |
-| Estilos | Tailwind CSS + shadcn/ui |
-| Backend | Supabase (DB + Auth + Edge Functions + Realtime) |
-| IA | OpenAI GPT-4o con Function Calling |
-| WhatsApp | Twilio |
-| Pagos | Stripe Subscriptions |
+| Tecnologia | Uso |
+|------------|-----|
+| Lovable | Generar UI inicial |
+| Supabase | Base de datos + Auth + Edge Functions |
+| Stripe | Pagos y suscripciones |
+| Twilio | WhatsApp Business API |
+| OpenAI | GPT-4o-mini para el asistente |
+| Vercel | Deploy |
 
-## Documentacion
+## Recursos
 
 | Archivo | Contenido |
 |---------|-----------|
-| [UI-PROMPT.md](./UI-PROMPT.md) | Prompt para generar UI en Lovable |
-| [BACKEND-SETUP.md](./BACKEND-SETUP.md) | Schema SQL de Supabase |
+| [UI-PROMPT.md](./UI-PROMPT.md) | Prompt para Lovable |
 
-## Arquitectura
+## Flujo del Video
+
+1. **Lovable** → Generar UI con el prompt
+2. **GitHub** → Sincronizar codigo
+3. **Antigravity** → Clonar y ajustar con IA
+4. **Supabase** → Configurar MCP, crear tablas automaticamente
+5. **Stripe** → Vincular productos y webhooks
+6. **Twilio** → Configurar sandbox de WhatsApp
+7. **OpenAI** → Agregar API key para el agente
+8. **Vercel** → Deploy final
+
+## Credenciales Necesarias (en Supabase Secrets)
 
 ```
-Usuario (WhatsApp)
-       |
-    Twilio
-       |
-  Edge Function (webhook)
-       |
-  Edge Function (ai-agent)
-       |
-    OpenAI API
-       |
-  Supabase DB
-       |
-    Twilio
-       |
-Usuario (WhatsApp)
+OPENAI_API_KEY
+TWILIO_ACCOUNT_SID
+TWILIO_AUTH_TOKEN
+STRIPE_SECRET_KEY
+STRIPE_WEBHOOK_SECRET
 ```
-
-## Tablas Principales
-
-- `gyms` - Datos del gimnasio (multi-tenant)
-- `members` - Miembros con estado de membresia
-- `membership_plans` - Planes con precios de Stripe
-- `classes` - Clases grupales con horarios
-- `class_bookings` - Reservas de clases
-- `payments` - Historial de pagos
-- `conversations` - Chats de WhatsApp
-- `messages` - Mensajes individuales
-
-## Funcionalidades de la IA
-
-1. **Consultar planes** - "Cuanto cuesta la membresia?"
-2. **Ver clases** - "Que clases hay manana?"
-3. **Reservar clase** - "Quiero reservar yoga el lunes"
-4. **Generar link de pago** - "Quiero pagar mi membresia"
 
 ---
 

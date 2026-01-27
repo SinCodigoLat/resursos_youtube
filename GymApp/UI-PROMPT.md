@@ -1,218 +1,122 @@
-# UI-PROMPT.md - Lovable
+# UI-PROMPT.md - Prompt para Lovable
 
-Prompt para generar la interfaz de Fit AI Coach en Lovable.
+Copia y pega este prompt en [Lovable.dev](https://lovable.dev) para generar la aplicacion.
 
 ---
 
-## Prompt
+Actua como un desarrollador Fullstack Senior. Crea una aplicacion llamada **Fit IA**, un asistente virtual para gimnasios que gestiona membresias y clases por WhatsApp.
 
-Crea **Fit AI Coach**: una plataforma SaaS de gestion para gimnasios con asistente de IA por WhatsApp.
+### 1. Estetica y Diseno (UI/UX)
+- **Tema**: 'Fitness Energetico'. Usa una paleta de colores: Verde vibrante (#22c55e), negro (#0f0f0f), blanco (#ffffff), gris oscuro (#1a1a1a).
+- **Tipografia**: Plus Jakarta Sans.
+- **Componentes**: Usa shadcn/ui con animaciones sutiles (fades, slides).
+- **Paginas**:
+  - **Landing Page**: Hero con gradientes, seccion de beneficios, y botones de llamada a la accion claros.
+  - **Auth**: Pagina de Login/Registro moderna con tarjetas centradas.
+  - **Dashboard**: Layout con navegacion por pestanas (Tabs) y Sidebar responsive.
 
-### Stack
-- React 18 + TypeScript + Vite
-- Tailwind CSS + shadcn/ui
-- React Router DOM v6
-- TanStack Query
-- React Hook Form + Zod
-- Lucide React (iconos)
-- Recharts (graficos)
-- Framer Motion (animaciones)
+### 2. Estructura del Dashboard (Pestanas)
+- **Mensajes**: Una interfaz de chat profesional estilo WhatsApp. Panel izquierdo con lista de chats (ultimo mensaje, hora, contador) y panel derecho con la conversacion (burbujas diferenciadas, avatares, auto-scroll).
+- **Miembros**: Tabla con busqueda. Columnas: nombre, telefono, email, plan activo, fecha de vencimiento, estado (activo/vencido/pendiente). Badge de color segun estado.
+- **Membresias**: Grid de cards con nombre del plan, precio mensual, duracion, beneficios (badges), y cantidad de miembros activos en ese plan.
+- **Clases**: Calendario visual con vista semanal. Cada celda muestra clase, instructor, horario, cupos disponibles/ocupados. Click en clase para ver miembros inscritos.
+- **Pagos**: Tabla con historial. Columnas: miembro, monto, fecha, metodo (efectivo/tarjeta/transferencia), estado (pagado/pendiente).
+- **Configuracion**: Formulario para editar datos del gimnasio (Nombre, Direccion, Horarios de apertura/cierre, Planes disponibles como Array, Clases disponibles como Array, y URL del Webhook).
 
-### Tema Visual
-- **Modo oscuro** como default
-- Fondo principal: `#0a0a0f` (casi negro con tinte azul)
-- Acento primario: `#6366f1` (indigo/violeta)
-- Acento secundario: `#22c55e` (verde para estados activos)
-- Glassmorphism en cards de landing
-- Bordes sutiles con `border-white/10`
+### 3. Integracion con Supabase (Backend)
+Configura las siguientes tablas:
 
-### Paginas
+**members:**
+- id (uuid, PK), name (text), phone (text, unique), email (text)
+- membership_id (uuid, FK), start_date (date), end_date (date)
+- status (text: active/expired/pending), created_at (timestamp)
 
-#### 1. Landing Page (/)
-- Hero con gradiente animado
-- Features grid (6 cards con iconos)
-- Seccion de pricing (3 planes)
-- CTA final
-- Botones: "Iniciar Gratis" y "Ver Demo"
+**memberships:**
+- id (uuid, PK), name (text), price (decimal), duration_days (int)
+- benefits (text[]), is_active (boolean)
 
-#### 2. Login (/login)
-- Formulario centrado con fondo blur
-- Email + Password
-- Link a registro
+**classes:**
+- id (uuid, PK), name (text), instructor (text), capacity (int)
+- schedule (jsonb), duration_minutes (int), is_active (boolean)
 
-#### 3. Registro (/register)
-- Nombre del gimnasio
-- Email + Password
-- Acepto terminos
+**bookings:**
+- id (uuid, PK), member_id (uuid, FK), class_id (uuid, FK)
+- date (date), time (time), status (text: confirmed/cancelled/attended)
+- created_at (timestamp)
 
-#### 4. Dashboard (/dashboard)
-Layout con sidebar oscuro colapsable:
+**payments:**
+- id (uuid, PK), member_id (uuid, FK), amount (decimal)
+- date (date), method (text: cash/card/transfer), status (text: paid/pending)
+- notes (text), created_at (timestamp)
 
-**Sidebar**:
-- Logo "Fit AI Coach"
-- Menu: Mensajes, Miembros, Membresias, Clases, Pagos, Configuracion
-- Icono de estado (online/offline)
+**messages:**
+- id (uuid, PK), member_id (uuid, FK), phone_number (text)
+- direction (text: inbound/outbound), content (text), created_at (timestamp)
 
-**Contenido principal** (cambia por seccion):
+**gym_config:**
+- id (uuid, PK), gym_name (text), address (text), timezone (text)
+- opening_time (time), closing_time (time), webhook_url (text)
 
-##### Mensajes (/dashboard/messages)
-Clon de WhatsApp:
-- Lista de conversaciones (izquierda)
-- Chat activo (derecha)
-- Input de mensaje
-- Badge de mensajes sin leer
-- Indicador "IA" en mensajes automaticos
+### 4. Logica Detallada de Edge Functions (IA y Automatizacion)
 
-##### Miembros (/dashboard/members)
-- Header: titulo + boton "Nuevo Miembro"
-- Barra de busqueda + filtros (estado, plan)
-- Tabla con columnas: Nombre, Telefono, Plan, Estado, Vencimiento, Acciones
-- Estados con badges de colores:
-  - Activo: verde
-  - Pendiente: amarillo
-  - Vencido: rojo
-- Modal para crear/editar miembro
+Genera el codigo para las siguientes funciones en Deno (Edge Functions):
 
-##### Membresias (/dashboard/plans)
-- Grid de cards (3 columnas)
-- Cada card: nombre, precio, duracion, beneficios, color
-- Boton editar/eliminar
-- Modal para crear/editar plan
-- Input de beneficios como chips/tags
+#### A. `twilio-webhook-whatsapp` (Cerebro con Memoria y Timezone)
+- **Seguridad**: Deshabilitar la verificacion de JWT para permitir POST de Twilio.
+- **Manejo de Entrada**: Procesar `Body` y `From`.
+- **Persistencia**: Guardar cada mensaje en la tabla `messages`.
+- **Memoria (Historial)**:
+  - Antes de llamar a OpenAI, consultar los ultimos 10-15 mensajes del mismo `phone_number` en la tabla `messages`.
+  - Enviar este historial a la API de OpenAI para que Fit tenga contexto de la conversacion.
+- **Sincronizacion Horaria**:
+  - Obtener el `timezone` de `gym_config`.
+  - Calcular la hora local del gimnasio y pasarla al System Prompt de OpenAI.
+  - Instruir al AI a generar fechas ISO 8601 basadas en esa hora local.
+- **Motor OpenAI**: Usar GPT-4o-mini con System Prompt dinamico.
+- **Function Calling (Herramientas)**:
+  - `get_membership_plans()` → Retorna lista de planes con precios y beneficios
+  - `register_member(name, phone, email, membership_id)` → Crea nuevo miembro con membresia
+  - `get_member_info(phone)` → Retorna info del miembro, plan activo, fecha vencimiento
+  - `get_available_classes(date?)` → Lista clases disponibles con cupos
+  - `book_class(phone, class_id, date)` → Inscribe miembro en clase
+  - `cancel_class_booking(phone, booking_id)` → Cancela inscripcion
+  - `register_payment(phone, amount, method)` → Registra pago y renueva membresia
+  - `check_payment_status(phone)` → Retorna estado de pagos y fecha de vencimiento
+- **Manejo de Respuesta**: Generar respuesta basada en historial y herramientas, guardarla en BD y enviarla via Twilio.
 
-##### Clases (/dashboard/classes)
-- Vista calendario semanal (7 columnas)
-- Clases como bloques de colores
-- Click en clase → modal con detalles y lista de inscritos
-- Boton "Nueva Clase"
-- Colores por tipo: yoga(verde), spinning(naranja), crossfit(rojo)
+#### B. `send-reminders` (Recordatorios de Pago y Vencimiento)
+- **Logica de Negocio**: Buscar miembros con `end_date = en 3 dias` y `status = active`.
+- **Mensajeria**: Por cada miembro, construir un mensaje amable recordando la fecha de vencimiento, monto a pagar, y metodos de pago disponibles.
+- **Control**: Marcar como notificado para no enviar duplicados.
 
-##### Pagos (/dashboard/payments)
-- Stats cards: Total mes, Pendientes, Completados
-- Grafico de barras (ultimos 6 meses)
-- Tabla de transacciones recientes
-- Columnas: Fecha, Miembro, Plan, Monto, Estado, Metodo
+#### C. `send-class-reminders` (Recordatorios de Clases)
+- **Logica de Negocio**: Buscar bookings con `date = hoy` y `status = confirmed`.
+- **Mensajeria**: Enviar recordatorio 2 horas antes de la clase con nombre, instructor y horario.
 
-##### Configuracion (/dashboard/settings)
-- Tabs: Perfil | WhatsApp | IA
-- Perfil: nombre gym, logo, direccion, telefono
-- WhatsApp: numero conectado, estado
-- IA: textarea para instrucciones personalizadas
+### 5. Configuracion de Automatizacion (Cron Jobs)
+Para los recordatorios, incluye las instrucciones para configurar los Cron Jobs en Supabase mediante SQL:
+```sql
+-- Recordatorios de vencimiento: cada manana a las 9:00 AM
+select cron.schedule(
+  'enviar-recordatorios-vencimiento',
+  '0 9 * * *',
+  $$
+  select net.http_post(
+    url:='https://[PROJECT_REF].supabase.co/functions/v1/send-reminders',
+    headers:='{"Content-Type": "application/json", "Authorization": "Bearer [SERVICE_ROLE_KEY]"}'::jsonb
+  ) as request_id;
+  $$
+);
 
-### Tipos TypeScript
-
-```typescript
-interface Gym {
-  id: string;
-  name: string;
-  logo_url?: string;
-  address?: string;
-  phone?: string;
-  email?: string;
-  whatsapp_number?: string;
-  ai_instructions?: string;
-}
-
-interface Member {
-  id: string;
-  gym_id: string;
-  name: string;
-  phone: string;
-  email?: string;
-  plan_id?: string;
-  status: 'active' | 'pending' | 'expired';
-  start_date?: string;
-  end_date?: string;
-  stripe_customer_id?: string;
-}
-
-interface MembershipPlan {
-  id: string;
-  gym_id: string;
-  name: string;
-  price: number;
-  duration_days: number;
-  benefits?: string[];
-  color?: string;
-  stripe_price_id?: string;
-}
-
-interface GymClass {
-  id: string;
-  gym_id: string;
-  name: string;
-  instructor: string;
-  day_of_week: number; // 0-6
-  time: string; // "07:00"
-  duration_minutes: number;
-  capacity: number;
-  color?: string;
-}
-
-interface ClassBooking {
-  id: string;
-  class_id: string;
-  member_id: string;
-  booking_date: string;
-  status: 'confirmed' | 'cancelled' | 'attended';
-}
-
-interface Payment {
-  id: string;
-  gym_id: string;
-  member_id?: string;
-  plan_id?: string;
-  amount: number;
-  status: 'pending' | 'completed' | 'failed';
-  method: 'stripe' | 'cash' | 'transfer';
-  paid_at?: string;
-}
-
-interface Conversation {
-  id: string;
-  gym_id: string;
-  phone: string;
-  name?: string;
-  member_id?: string;
-  last_message?: string;
-  last_message_at?: string;
-  unread_count: number;
-}
-
-interface Message {
-  id: string;
-  conversation_id: string;
-  content: string;
-  direction: 'inbound' | 'outbound';
-  is_from_ai: boolean;
-  created_at: string;
-}
+-- Recordatorios de clases: cada hora
+select cron.schedule(
+  'enviar-recordatorios-clases',
+  '0 * * * *',
+  $$
+  select net.http_post(
+    url:='https://[PROJECT_REF].supabase.co/functions/v1/send-class-reminders',
+    headers:='{"Content-Type": "application/json", "Authorization": "Bearer [SERVICE_ROLE_KEY]"}'::jsonb
+  ) as request_id;
+  $$
+);
 ```
-
-### Datos Mock
-
-```typescript
-const mockPlans = [
-  { id: '1', name: 'Basico', price: 30, duration_days: 30, color: '#6b7280', benefits: ['Acceso gym', '2 clases/semana'] },
-  { id: '2', name: 'Premium', price: 50, duration_days: 30, color: '#6366f1', benefits: ['Acceso ilimitado', 'Todas las clases', 'Casillero'] },
-  { id: '3', name: 'VIP', price: 80, duration_days: 30, color: '#eab308', benefits: ['Todo Premium', 'Entrenador personal', 'Nutriologo'] },
-];
-
-const mockClasses = [
-  { id: '1', name: 'Yoga', instructor: 'Ana Lopez', day_of_week: 1, time: '07:00', duration_minutes: 60, capacity: 20, color: '#22c55e' },
-  { id: '2', name: 'Spinning', instructor: 'Pedro Sanchez', day_of_week: 1, time: '18:00', duration_minutes: 45, capacity: 15, color: '#f97316' },
-  { id: '3', name: 'CrossFit', instructor: 'Roberto Torres', day_of_week: 3, time: '09:00', duration_minutes: 60, capacity: 12, color: '#ef4444' },
-];
-```
-
-### Responsive
-- Sidebar colapsado en mobile (hamburger menu)
-- Cards en 1 columna en mobile
-- Tablas con scroll horizontal
-- Chat ocupa pantalla completa en mobile
-
-### Animaciones
-- Fade in para transiciones de pagina
-- Scale en hover de cards
-- Slide para sidebar en mobile
-- Loading skeletons en carga de datos
