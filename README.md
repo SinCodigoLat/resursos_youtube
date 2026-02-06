@@ -29,6 +29,11 @@ resursos_youtube/
 │   ├── INTEGRATION.md       # Integración frontend-backend
 │   └── DEPLOYMENT.md        # Guía de despliegue
 │
+├── OdooChat/                # OdooChat - Asistente IA para Odoo
+│   ├── README.md            # Documentación principal
+│   ├── LOVABLE-PROMPT.md    # Prompt para generar UI en Lovable
+│   └── TROUBLESHOOTING.md   # Errores comunes y soluciones
+│
 └── [Más proyectos próximamente...]
 ```
 
@@ -54,6 +59,25 @@ resursos_youtube/
 - ✅ Deploy en producción
 
 **📖 [Ver documentación completa →](./Pide/README.md)**
+
+---
+
+### 🤖 OdooChat - Asistente IA para Odoo
+
+**Descripción**: Habla con tu ERP Odoo usando lenguaje natural. Consulta pipeline de ventas, inventario, tareas y más desde un chat con IA.
+
+**Stack Tecnológico**:
+- Frontend: React 18 + TypeScript + Vite + Tailwind + Shadcn/ui
+- Backend: Supabase (Auth + Edge Functions)
+- IA: OpenAI GPT-4o (Function Calling)
+- ERP: Odoo (JSON-RPC API)
+
+**Recursos incluidos**:
+- ✅ Prompt completo para generar la UI en Lovable
+- ✅ Guía de troubleshooting con errores comunes y soluciones
+- ✅ Documentación de arquitectura y configuración
+
+**📖 [Ver documentación completa →](./OdooChat/README.md)**
 
 ---
 
@@ -107,7 +131,7 @@ Puedes usar, modificar y compartir estos recursos libremente.
 
 Este repositorio se actualiza regularmente con nuevos proyectos y recursos.
 
-**Última actualización**: 2025-01-01
+**Última actualización**: 2026-02-06
 
 ---
 
