@@ -1,148 +1,47 @@
 # 📺 Recursos YouTube - Sin Código Lat
 
-> Repositorio de recursos, documentación y guías completas para la comunidad de YouTube
+> Repositorio oficial de recursos, PRDs y documentación para la comunidad de **Sin Código**.
 
 ---
 
 ## 🎯 ¿Qué es este repositorio?
 
-Este repositorio contiene **recursos educativos completos** relacionados con los tutoriales y proyectos compartidos en el canal **Sin Código Lat** de YouTube.
-
-Aquí encontrarás:
-- 📚 Documentación técnica detallada
-- 🛠️ Guías paso a paso
-- 💻 Código de ejemplo
-- 📋 Checklists y recursos auxiliares
-- 🎓 Material de aprendizaje
+Este espacio centraliza todos los recursos técnicos relacionados con los tutoriales y proyectos compartidos en el canal. Aquí encontrarás guías paso a paso, archivos de requerimientos (PRD) y prompts para potenciar tus desarrollos con IA y herramientas No-Code/Low-Code.
 
 ---
 
-## 📁 Estructura del Repositorio
+## 🔗 Conecta conmigo
 
-```
-resursos_youtube/
-├── Pide/                    # Proyecto PIDE - App de pedidos con AI
-│   ├── README.md            # Documentación principal
-│   ├── UI-PROMPT.md         # Guía de generación de UI
-│   ├── BACKEND-SETUP.md     # Configuración de backend
-│   ├── EDGE-FUNCTIONS.md    # Funciones serverless
-│   ├── INTEGRATION.md       # Integración frontend-backend
-│   └── DEPLOYMENT.md        # Guía de despliegue
-│
-├── OdooChat/                # OdooChat - Asistente IA para Odoo
-│   ├── README.md            # Documentación principal
-│   ├── LOVABLE-PROMPT.md    # Prompt para generar UI en Lovable
-│   └── TROUBLESHOOTING.md   # Errores comunes y soluciones
-│
-└── [Más proyectos próximamente...]
-```
+¡Mantente al día con las últimas herramientas y tutoriales!
+
+- 📺 **YouTube**: [youtube.com/sincodigo](https://www.youtube.com/sincodigo)
+- 🌐 **Web**: [agenciasincodigo.com](https://agenciasincodigo.com/)
+- 🐦 **X (Twitter)**: [@JorgeSinCodigo](https://x.com/JorgeSinCodigo)
 
 ---
 
-## 🚀 Proyectos Disponibles
+## 📁 Proyectos Destacados
 
-### 📦 PIDE - Food AI App
-
-**Descripción**: Aplicación web completa de pedidos de comida con asistente AI conversacional.
-
-**Stack Tecnológico**:
-- Frontend: React 18 + TypeScript + Vite + Tailwind + Shadcn/ui
-- Backend: Supabase (PostgreSQL + Edge Functions)
-- Pagos: Stripe
-- Deploy: Vercel + Supabase Cloud
-
-**Características**:
-- ✅ Interfaz moderna y responsiva
-- ✅ Chat con asistente AI
-- ✅ Sistema de pedidos completo
-- ✅ Integración con Stripe
-- ✅ Deploy en producción
-
-**📖 [Ver documentación completa →](./Pide/README.md)**
+- 🛵 **OrderFlow - Delivery**: Sistema completo de logística para restaurantes.
+- 🤖 **OdooChat**: Asistente con IA para interactuar con el ERP Odoo.
+- 📦 **PIDE**: App de pedidos inteligente.
 
 ---
 
-### 🤖 OdooChat - Asistente IA para Odoo
+## 🤝 Contacto y Colaboraciones
 
-**Descripción**: Habla con tu ERP Odoo usando lenguaje natural. Consulta pipeline de ventas, inventario, tareas y más desde un chat con IA.
+¿Tienes una idea, quieres colaborar o necesitas consultoría para tu negocio?
 
-**Stack Tecnológico**:
-- Frontend: React 18 + TypeScript + Vite + Tailwind + Shadcn/ui
-- Backend: Supabase (Auth + Edge Functions)
-- IA: OpenAI GPT-4o (Function Calling)
-- ERP: Odoo (JSON-RPC API)
-
-**Recursos incluidos**:
-- ✅ Prompt completo para generar la UI en Lovable
-- ✅ Guía de troubleshooting con errores comunes y soluciones
-- ✅ Documentación de arquitectura y configuración
-
-**📖 [Ver documentación completa →](./OdooChat/README.md)**
+- 📧 **General**: [sincodigolat@gmail.com](mailto:sincodigolat@gmail.com)
+- 💼 **Business**: [jorge@essincodigo.com](mailto:jorge@essincodigo.com)
 
 ---
 
-## 🎓 Cómo Usar Este Repositorio
+## ⭐ Apoya a la comunidad
 
-1. **Explora los proyectos**: Navega por las carpetas para encontrar el proyecto que te interese
-2. **Lee la documentación**: Cada proyecto tiene su propio README con toda la información
-3. **Sigue las guías**: Los documentos están organizados en orden secuencial
-4. **Aprende paso a paso**: Cada guía incluye checklists y tiempos estimados
+Si estos recursos te han sido útiles:
+1. **Dale una estrella** ⭐ a este repositorio.
+2. **Suscríbete** al canal de YouTube.
+3. **Comparte** tus logros con la comunidad.
 
----
-
-## 📺 Canal de YouTube
-
-**Sin Código Lat**
-
-Suscríbete para:
-- 🎥 Tutoriales paso a paso
-- 💡 Tips y trucos de desarrollo
-- 🚀 Proyectos completos desde cero
-- 🎓 Aprende sin código y con código
-
----
-
-## 🤝 Contribuciones
-
-Este es un repositorio de recursos educativos. Si encuentras errores o tienes sugerencias:
-
-1. Abre un Issue en GitHub
-2. Describe el problema o sugerencia
-3. ¡Tu feedback es bienvenido!
-
----
-
-## 📝 Licencia
-
-Este repositorio contiene recursos educativos de código abierto.  
-Puedes usar, modificar y compartir estos recursos libremente.
-
----
-
-## 🔗 Enlaces Útiles
-
-- 📺 [Canal de YouTube](https://youtube.com/@SinCodigoLat)
-- 💬 [Comunidad](https://github.com/SinCodigoLat)
-- 📧 Contacto: [A través de GitHub]
-
----
-
-## 📅 Actualizaciones
-
-Este repositorio se actualiza regularmente con nuevos proyectos y recursos.
-
-**Última actualización**: 2026-02-06
-
----
-
-## ⭐ ¿Te Sirvió?
-
-Si este repositorio te ayudó en tu aprendizaje:
-- ⭐ Dale una estrella al repositorio
-- 📺 Suscríbete al canal de YouTube
-- 💬 Comparte tus proyectos creados
-
----
-
-**¡Gracias por ser parte de la comunidad! 🚀**
-
+**¡Gracias por ser parte de la revolución del desarrollo moderno! 🚀**
