@@ -23,6 +23,7 @@ Este espacio centraliza todos los recursos técnicos relacionados con los tutori
 ## 📁 Proyectos Destacados
 
 - 🛵 **OrderFlow - Delivery**: Sistema completo de logística para restaurantes.
+- 🏢 **Gestión de Edificios y Condominios**: MVP navegable para operación residencial.
 - 🤖 **OdooChat**: Asistente con IA para interactuar con el ERP Odoo.
 - 📦 **PIDE**: App de pedidos inteligente.
 
