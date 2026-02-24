@@ -22,13 +22,13 @@ Este espacio centraliza todos los recursos técnicos relacionados con los tutori
 
 ## 📁 Todos los Proyectos
 
-- [CRM-Google-Sheets](./CRM-Google-Sheets)
-- [GymApp](./GymApp)
-- [Luna-IA](./Luna-IA)
-- [OdooChat](./OdooChat)
-- [Pide](./Pide)
-- [gestion-edificios-condominios](./gestion-edificios-condominios)
-- [orderflow - delivery restaurantes](./orderflow%20-%20delivery%20restaurantes)
+- [CRM-Google-Sheets](./CRM-Google-Sheets): CRM ligero sobre Google Sheets con scripts de autenticacion y CRUD para clientes.
+- [GymApp](./GymApp): Prompt y documentacion para construir un MVP UI de gestion para gimnasios.
+- [Luna-IA](./Luna-IA): Base documental de prompts, setup y gotchas para un asistente con IA orientado a operaciones.
+- [OdooChat](./OdooChat): Asistente conversacional para Odoo con prompt maestro, guia de uso y troubleshooting tecnico.
+- [Pide](./Pide): Suite completa de documentacion para app de pedidos (UI, integracion, backend, edge functions y deploy).
+- [gestion-edificios-condominios](./gestion-edificios-condominios): PRD y recurso del video para MVP navegable de administracion residencial en Mexico.
+- [orderflow - delivery restaurantes](./orderflow%20-%20delivery%20restaurantes): PRD y recurso de un sistema de flujo operativo de delivery para restaurantes.
 
 ---
 
