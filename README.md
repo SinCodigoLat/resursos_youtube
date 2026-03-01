@@ -29,6 +29,7 @@ Este espacio centraliza todos los recursos técnicos relacionados con los tutori
 - [Pide](./Pide): Suite completa de documentacion para app de pedidos (UI, integracion, backend, edge functions y deploy).
 - [gestion-edificios-condominios](./gestion-edificios-condominios): PRD y recurso del video para MVP navegable de administracion residencial en Mexico.
 - [orderflow - delivery restaurantes](./orderflow%20-%20delivery%20restaurantes): PRD y recurso de un sistema de flujo operativo de delivery para restaurantes.
+- [service-hub-live](./service-hub-live): PRD, roadmap y recurso del video para app de servicios en demanda.
 
 ---
 
