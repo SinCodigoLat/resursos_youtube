@@ -27,6 +27,7 @@ Este espacio centraliza todos los recursos técnicos relacionados con los tutori
 - [Luna-IA](./Luna-IA): Base documental de prompts, setup y gotchas para un asistente con IA orientado a operaciones.
 - [OdooChat](./OdooChat): Asistente conversacional para Odoo con prompt maestro, guia de uso y troubleshooting tecnico.
 - [Pide](./Pide): Suite completa de documentacion para app de pedidos (UI, integracion, backend, edge functions y deploy).
+- [CasaLista](./CasaLista): PRD y recurso del video para plataforma de gestion de servicios a domicilio con flujo Admin, Tecnico y Cliente.
 - [gestion-edificios-condominios](./gestion-edificios-condominios): PRD y recurso del video para MVP navegable de administracion residencial en Mexico.
 - [orderflow - delivery restaurantes](./orderflow%20-%20delivery%20restaurantes): PRD y recurso de un sistema de flujo operativo de delivery para restaurantes.
 - [service-hub-live](./service-hub-live): PRD, roadmap y recurso del video para app de servicios en demanda.
